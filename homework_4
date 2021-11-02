@@ -1,0 +1,56 @@
+#include <iostream>
+#include <cmath>
+
+#define e 2.71828182846
+
+double CalculateE(int z, int numberOfIterations);
+
+int CalculateFactorial(int n);
+
+double CalculateError(double approxE, int z);
+
+void PrintValueAndError(int z, int numberOfIterations);
+
+
+int main(){
+    int z;
+    std::cout << "Enter the value of z: ";
+    std::cin >> z;
+
+    PrintValueAndError(z, 10);
+
+    return 0;
+}
+
+int CalculateFactorial(int n) {
+    if(n > 1){
+        return n * CalculateFactorial(n - 1);
+    } else {
+        return 1;
+    }
+}
+
+double CalculateE(int z, int numberOfIterations) {
+    double accumulator = 1;
+    accumulator += z;
+    if(numberOfIterations == 2) {
+        return accumulator;
+    } else {
+        for(int k = 2; k < numberOfIterations; k++){
+            accumulator += pow(z, k)/CalculateFactorial(k);
+        }
+        return accumulator;
+    }
+}
+
+double CalculateError(double approxE, int z) {
+    double difference;
+    difference = approxE - pow(e, z);
+    return std::abs(difference);
+}
+
+void PrintValueAndError(int z, int numberOfIterations) {
+    double valueOfE = CalculateE(z, numberOfIterations);
+    std::cout << valueOfE << std::endl;
+    std::cout << CalculateError(valueOfE, z) << std::endl;
+}
