@@ -1,0 +1,54 @@
+#include <iostream>
+#include <climits>
+
+//unsigned short int
+//unsigned int
+//unsigned long
+//unsigned long long
+
+template<typename T>
+T GetMax() {
+    T max;
+    return max;
+}
+
+
+template <typename T>
+void CalculateMaxFactorial() {
+    T i = 1, factorial;
+
+    for (factorial = 1; factorial <= GetMax<T>() / i; i++) {
+        factorial = factorial * i;
+    }
+    std:: cout << factorial << " " << i - 1 << std::endl;
+}
+
+
+template<>
+unsigned short int GetMax<unsigned short int>() {
+    return SHRT_MAX;
+}
+
+template<>
+unsigned int GetMax<unsigned int>() {
+    return UINT_MAX;
+}
+
+template<>
+unsigned long int GetMax<unsigned long int>() {
+    return ULONG_MAX;
+}
+
+template<>
+unsigned long long int GetMax<unsigned long long int>() {
+    return ULLONG_MAX;
+}
+
+int main()
+{
+        CalculateMaxFactorial<unsigned short int>();
+        CalculateMaxFactorial<unsigned int>();
+        CalculateMaxFactorial<unsigned long int>();
+        CalculateMaxFactorial<unsigned long long int>();
+        return 0;
+}
